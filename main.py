@@ -1,11 +1,10 @@
-#!/usr/bin/env python3
 """
 Scraper using Playwright to get dynamic data from bonbast.com.
 """
 
 from playwright.sync_api import sync_playwright
 import sys
-from bs4 import BeautifulSoup # Used to prettify the final HTML
+from bs4 import BeautifulSoup 
 
 URL = "https://www.bonbast.com/"
 
@@ -43,7 +42,6 @@ def fetch_dynamic_data(debug_id: str = "eur1"):
             usd2_text = page.locator(usd2_selector).text_content()
             
             # --- Get the parent table for debugging ---
-            # We find the element by the debug_id, then ask for its ancestor <table>
             debug_element = page.locator(f"id={debug_id}")
             parent_table = debug_element.locator("xpath=./ancestor::table[1]")
             table_html = parent_table.inner_html()
